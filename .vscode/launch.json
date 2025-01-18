@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/raosahab/Study/programming/dsa/LinkedList/doubly_linked_list",
-      "program": "/home/raosahab/Study/programming/dsa/LinkedList/doubly_linked_list/build/Debug/outDebug",
+      "cwd": "/home/raosahab/Study/programming/dsa/LinkedList/circular_linked_list/double_circular_ls",
+      "program": "/home/raosahab/Study/programming/dsa/LinkedList/circular_linked_list/double_circular_ls/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

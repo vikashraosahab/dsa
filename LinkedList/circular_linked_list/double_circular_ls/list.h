@@ -1,0 +1,202 @@
+#include <iostream>
+#include <unordered_set>
+#include <exception>
+// CREATE A NODE FOR LINKED LIST
+// USE TEMPLATE CLASS FOR CREATEING NODE
+namespace standard {
+    template <class T> 
+    class LinkedNode {
+    public:
+     T key;
+     LinkedNode *next;
+     LinkedNode *prev;
+     LinkedNode ():key (-1),next (nullptr),prev (nullptr) {};
+     LinkedNode (int key):key (key),next (nullptr),prev (nullptr) {};
+};
+
+template <class T> class LinkedList {
+    private:
+     LinkedNode <T> *head;
+     LinkedNode <T> *tail;
+     int size;
+    public:
+     LinkedList ();
+    ~LinkedList ();
+     void push_back (T);
+     void push_front (T);
+     void insert (T,int);
+     void pop_front ();
+     void pop_back ();
+     void remove (T);
+     T front ();
+     T back ();
+     std::unordered_set <T> unique ();
+     int get_size ();
+     void display ();
+     void sort ();
+     void reverse ();
+};
+// CLASS CONSTRUCTOR OF THE LINKED LIST 
+ template <typename T>
+ LinkedList <T>::LinkedList () {
+    head = tail = nullptr;
+    size = 0;
+ };
+ // METHOD THAT INSERT NODE AT THE FRONT OR BEGGIN OF THE LINKED LIST
+ template <typename T> 
+ void LinkedList <T>::push_front (T value) {
+    LinkedNode<T> *newnode = new LinkedNode <T> (value);
+    try {
+        if (newnode) {
+              size++;
+              if (head == nullptr) { // INSERT DATA WHEN THERE IS NO ELEMENT IN THE LINKED LIST
+                head = tail = newnode;
+                tail->next = head;
+                head->prev = tail;
+                return;
+              }
+              else { // INSERT DATA WHEN ELEMENT IS ALREADY IN THE LINKED LIST
+                newnode->next = head;
+                head->prev = newnode;
+                newnode->prev = tail;
+                head = newnode;
+                tail->next = head;
+                return;
+              }
+        } 
+        else 
+          throw newnode; // THROW AN EXCEPTION 
+    }
+    catch (LinkedNode <T> *ptrNode) { // HANDLE THE EXCEPTION
+      std::cout << "\nThere is no dynamic memory allocation !" << std::endl;
+    }
+ }
+ // METHOD THAT PUSH NODE AT THE END OF THE LINKED AT THE TAIL POSITION
+ template <typename T>
+ void LinkedList <T>::push_back (T value) {
+    LinkedNode <T> *node = new LinkedNode <T> (value);
+    try {
+      if (node) {
+         size++;
+        if (head == nullptr) { // INSERT DATA WHEN HEAD IS NULL
+         head = tail = node;
+         head->prev = tail;
+         tail->next = head;
+         return;
+        }
+        else { // INSERT NODE WHEN THERE IS AT LEAST ONE NODE IN THE LINKED LIST
+         tail->next = node;
+         node->prev = tail;
+         tail = node;
+         tail->next = head;
+         return;
+        }
+      }
+      else 
+       throw node;
+    }
+    catch (LinkedNode <T> ptrNode) {
+        std::cerr << "" << std::endl;
+    }
+    return;
+ }
+ // METHOD THAT INSERT POSITION NODE BETWEEN IN THE LINKED LIST
+ template <typename T>
+ void LinkedList <T>:: insert (T value, int pos) { // MEHTOD THAT PUSH NODE AT THE SPECIFIC POSITION IN THE LINKED LIST
+   if (pos < 0 || pos > size)
+     return;
+   LinkedNode <T> *node = new LinkedNode <T> (value);
+   try {
+    if (node) {
+      if (pos == 1) { 
+         node->next = head;
+         head->prev = node;
+         head = node;
+         tail->next = head;
+         return;
+      }
+         LinkedNode <T> *temp = head;
+         LinkedNode <T> *pre = nullptr;
+         int i = 1;
+         while (i < pos) { // TRAVERSE UNTIL NOT REACH AT THE PRE RIGHT POSITION
+            pre = temp;
+            temp = temp->next;
+            i++;
+         } // INSERT NODE AT THE GIVE POSITION
+         node->next = temp;
+         temp->prev = node;
+         pre->next = node;
+         node->prev = pre;
+         return;
+    }
+    else 
+     throw node;
+   }
+   catch (LinkedNode <T> ptrNode) {
+     std::cerr << "Dynamic memory allocation !" << std::endl;
+   }
+   return;
+ }
+ // POP GENERALLY DELETES THE NODE FROM THE LINKED LIST 
+template <typename T> 
+void LinkedList <T>::pop_front () {
+   if (head == nullptr)
+     return;
+   size--;
+   if (head == tail)  { // WHEN THERE IS ONLY ONE NODE IN THE LINKED LIST
+     head = tail = nullptr;
+     return;
+   }
+   // WHEN DELETE OTHER NODE FROM THE LINKED LIST
+   LinkedNode <T> *temp = head;
+   head = head->next;
+   tail->next = head;
+   head->prev = tail;
+   delete temp;
+}
+template <typename T> 
+void LinkedList <T>:: pop_back () {
+  if (head == nullptr) 
+    return;
+  size--;
+  if (head == tail) {
+    head = tail = nullptr;
+    return;
+  }
+  LinkedNode <T> *temp = head;
+  while (temp->next != tail) {
+    temp = temp->next;
+  }
+  temp->next = tail->next;
+  if (tail != nullptr)
+    tail->prev = temp;
+  LinkedNode <T> *dump = tail;
+  delete dump;
+  tail = temp;
+  tail->next = head;
+  return;
+}
+ // DISPLAY EACH ELEMENTS OF THE LINKED LIST
+ template <typename T>
+ void LinkedList <T>::display () {
+    if (head == nullptr) 
+      return;
+    LinkedNode <T> *temp = head; 
+    while (temp->next != head) { // TRAVERSE UNITL NOT GET NULL
+        std::cout << temp->key << " " << std::endl;
+        temp = temp->next;
+    }
+    std::cout << temp->key << " " << std::endl;
+    return;
+ }
+ // METHOD THAT RETURN THE SIZE OF THE LINKED LIST
+ template <typename T> // RETURN SIZE OF THE LINKED LIST
+ int LinkedList <T>::get_size () {
+   return size;
+ }
+ template <typename T>
+ LinkedList <T>::~LinkedList () {
+    std::cout << "\nProgram is ended now !" << std::endl;
+ };
+
+}

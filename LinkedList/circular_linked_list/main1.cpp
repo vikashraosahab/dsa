@@ -195,18 +195,6 @@ namespace list {
         return -1;
       return tail->key;
     }
-   void List::remove (int val) {
-       Node *ans = new Node (0,head);
-       Node *dummy = ans;
-       while (dummy->next != head) {
-         while (dummy->next != head && dummy->next->key == val)
-           dummy->next = dummy->next->next;
-         dummy = dummy->next;
-       }
-      delete head;
-      head = ans->next;
-      delete dummy;
-    }
 };
 
 // DEFINE USER DEFINE NAMESPACE 

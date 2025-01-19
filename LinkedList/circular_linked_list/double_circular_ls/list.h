@@ -12,7 +12,8 @@ namespace standard {
      LinkedNode *next;
      LinkedNode *prev;
      LinkedNode ():key (-1),next (nullptr),prev (nullptr) {};
-     LinkedNode (int key):key (key),next (nullptr),prev (nullptr) {};
+     LinkedNode (T key):key (key),next (nullptr),prev (nullptr) {};
+     LinkedNode (T key,LinkedNode <T> *next):key (key),next (next),prev (nullptr) {};
 };
 
 template <class T> class LinkedList {
@@ -192,10 +193,20 @@ void LinkedList <T>:: pop_back () {
   return;
 }
 
+/*
 template <typename T> 
 void LinkedList <T>::remove (T val) {
-  
+  LinkedNode <T> *ans = new LinkedNode <T> (0,head);
+  LinkedNode <T> *ptr = 
+  LinkedNode <T> *temp = head;
+  while (temp->next != head) {
+    while (temp->next != head && temp->key == val) 
+      temp = temp->next;
+    ptr->next = temp;
+    temp = temp->next;
+  }
 }
+*/
 template <typename T>
 void LinkedList <T>::sorted () {
   if (head == nullptr) return;

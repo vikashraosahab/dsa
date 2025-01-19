@@ -4,41 +4,38 @@
 #include <unordered_set>
 
 using namespace standard;
+
+// MAIN FUNCTION OF THE PROGRAM
 int main (void) {
     LinkedList <int> myobj;
-    myobj.push_front (20);
-    myobj.push_front (33);
-    myobj.push_front (32);
-    myobj.push_back (320);
-    myobj.push_back (320);
-    myobj.push_back (302);
-    myobj.insert (2301,3);
+    myobj.push_back (20);
+    myobj.push_back (20);
+    myobj.push_back (25);
+    myobj.push_front (50);
+    myobj.push_front (55);
+    myobj.push_front (52);
+    //myobj.reverse ();
+    myobj.push_back (206);
+    myobj.push_back (500);
+    myobj.insert (200,3);
+    myobj.insert (230,4);
     myobj.pop_back ();
-    myobj.pop_back ();
-    myobj.push_front (10);
-    myobj.push_front (10);
-   // myobj.remove (10);
-    std::unordered_set <int> sett;
-    sett = myobj.unique ();
-    //std::cout << sett.size () << std::endl;
-    std::cout << "\nDisplay : " << std::endl;
-    for (auto it = sett.begin(); it != sett.end();it++) {
-        std::cout << *it << std::endl;
+    myobj.pop_front ();
+    // myobj.reverse ();
+    myobj.sorted ();
+    myobj.reverse ();
+    myobj.remove (20);
+    std::cout << "Display elements : " << std::endl;
+    std::cout << "Frist : " << myobj.front () << std::endl;
+    std::cout << "Last : " << myobj.back () << std::endl;
+    myobj.display ();
+
+    std::cout << "Unique elements : " << std::endl;
+    //myobj.sorted ();
+    std::unordered_set <int> unique = myobj.unique ();
+    for (int value : unique) {
+        std::cout << value << std::endl;
     }
-    
-    // FOR CHARACKTERS 
-    LinkedList <char> myobj2;
-    myobj2.push_back ('a');
-    myobj2.push_back ('b');
-    myobj2.push_front ('A');
-    myobj2.push_front ('B');
-    //myobj2.pop_front ();
-    //myobj2.pop_front ();
-   // myobj2.pop_front ();
-    //myobj2.pop_front ();
-    std::cout << "Front : " << myobj2.front () << std::endl;
-    std::cout << "Back : " << myobj2.back () << std::endl;
-    std::cout << "Size : " << myobj2.get_size () << std::endl;
-    myobj2.display ();
+    std::cout << "Length of the linked list : " << myobj.get_size () << std::endl;
     return 0;
 }

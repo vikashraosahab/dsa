@@ -34,8 +34,10 @@ template <class T> class LinkedList {
      std::unordered_set <T> unique ();
      int get_size ();
      void display ();
-     void sort ();
+     void sorted ();
      void reverse ();
+    // void bubble_sort (std::vector <T>);
+    void bubble_sort (std::vector <T>&);
 };
 // CLASS CONSTRUCTOR OF THE LINKED LIST 
  template <typename T>
@@ -192,47 +194,36 @@ void LinkedList <T>:: pop_back () {
 
 template <typename T> 
 void LinkedList <T>::remove (T val) {
-  if (head == nullptr)
-    return;
-  if (head == tail && head->key == val) {
-    head = tail = nullptr;
-    return;
-  }
+  
+}
+template <typename T>
+void LinkedList <T>::sorted () {
+  if (head == nullptr) return;
   std::vector <T> ary;
   LinkedNode <T> *temp = head;
-  int i = 0;
-  while (temp) {
-    if (temp->key != val) {
-      ary.push_back (temp->key);
-    }
+  while (temp->next != head) {
+     ary.push_back (temp->key);
+     temp = temp->next;
+  }
+  ary.push_back (temp->key);
+ // sort (ary.end(),ary.begin());
+  bubble_sort (ary);
+  temp = head;
+  while (temp->next != head) {
+    temp->key = ary.back();
+    ary.pop_back ();
     temp = temp->next;
   }
-  head = nullptr;
-  tail = nullptr;
-  for (int value : ary) {
-    LinkedNode <T> *node = new LinkedNode <T> (value);
-    try {
-      if (node) {
-         if (head == nullptr) {
-           head = tail = node;
-           head->prev = tail;
-           tail->next = head;
-         }
-         else {
-          node->next = head;
-          tail->next = node;
-          node->prev = tail;
-          tail = node;
-          head->prev = tail;
-         }
+}
+template <typename T>
+void LinkedList <T>::bubble_sort (std::vector <T> &ary) {
+   for (int i =0; i < ary.size (); i++) {
+     for (int j = 0; j < ary.size () - i - 1; j++) {
+      if (ary [j] < ary [j + 1]) {
+        std::swap (ary[j],ary[j + 1]);
       }
-      else 
-       throw node;
-    }
-    catch (LinkedNode <T> ptrNode) {
-       std::cerr << "Node node dynamic allocation !";
-    }
-  }
+     }
+   }
 }
  // DISPLAY EACH ELEMENTS OF THE LINKED LIST
  template <typename T>
@@ -262,12 +253,26 @@ T LinkedList<T>::front () { // RETURN VALUE OF THE HEAD
     return -1;
  }
  template <typename T>
- void LinkedList <T>::sort () {
-
- }
- template <typename T>
  void LinkedList <T>::reverse () {
-
+     if (head == nullptr) return;
+     std::vector <T> ary;
+     LinkedNode <T> *temp = head;
+    // int counting = 1;
+     while (temp->next != head) {
+    //  std::cout << counting++ << std::endl;
+      ary.push_back (temp->key); // STORE  DATA IN THE VECTOR 
+      temp = temp->next;
+     }
+     ary.push_back (temp->key);
+     temp = head; // RE-ASSIGN HEAD INTO TEMP 
+     size_t length = ary.size ();
+     std::cout << ary.size () << std::endl;
+    // std::cout << length << std::endl; // FOR FLAG CHECKING LENGTH OF THE VECTOR ARRAY
+     for (int i = length - 1; i >= 0; i--) {
+       temp->key = ary [i];
+       temp = temp->next;
+     }
+     return;
  }
  // METHOD THAT RETURN THE SIZE OF THE LINKED LIST
  template <typename T> // RETURN SIZE OF THE LINKED LIST

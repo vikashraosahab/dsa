@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_set>
 #include <exception>
+#include <vector>
 // CREATE A NODE FOR LINKED LIST
 // USE TEMPLATE CLASS FOR CREATEING NODE
 namespace standard {
@@ -100,6 +101,18 @@ template <class T> class LinkedList {
     }
     return;
  }
+ template <typename T>
+ std::unordered_set <T> LinkedList <T>::unique () {
+   std::unordered_set <T> seen;
+   LinkedNode <T> *temp = head;
+   while (temp->next != head) {
+     if (seen.find (temp->key) == seen.end())
+       seen.insert (temp->key);
+     temp = temp->next;
+   }
+   //std::cout << seen.size () << std::endl;
+   return seen;
+ }
  // METHOD THAT INSERT POSITION NODE BETWEEN IN THE LINKED LIST
  template <typename T>
  void LinkedList <T>:: insert (T value, int pos) { // MEHTOD THAT PUSH NODE AT THE SPECIFIC POSITION IN THE LINKED LIST
@@ -176,6 +189,51 @@ void LinkedList <T>:: pop_back () {
   tail->next = head;
   return;
 }
+
+template <typename T> 
+void LinkedList <T>::remove (T val) {
+  if (head == nullptr)
+    return;
+  if (head == tail && head->key == val) {
+    head = tail = nullptr;
+    return;
+  }
+  std::vector <T> ary;
+  LinkedNode <T> *temp = head;
+  int i = 0;
+  while (temp) {
+    if (temp->key != val) {
+      ary.push_back (temp->key);
+    }
+    temp = temp->next;
+  }
+  head = nullptr;
+  tail = nullptr;
+  for (int value : ary) {
+    LinkedNode <T> *node = new LinkedNode <T> (value);
+    try {
+      if (node) {
+         if (head == nullptr) {
+           head = tail = node;
+           head->prev = tail;
+           tail->next = head;
+         }
+         else {
+          node->next = head;
+          tail->next = node;
+          node->prev = tail;
+          tail = node;
+          head->prev = tail;
+         }
+      }
+      else 
+       throw node;
+    }
+    catch (LinkedNode <T> ptrNode) {
+       std::cerr << "Node node dynamic allocation !";
+    }
+  }
+}
  // DISPLAY EACH ELEMENTS OF THE LINKED LIST
  template <typename T>
  void LinkedList <T>::display () {
@@ -189,6 +247,28 @@ void LinkedList <T>:: pop_back () {
     std::cout << temp->key << " " << std::endl;
     return;
  }
+ // GET FRONT NODE OF THE LINKED LIST
+template <typename T>
+T LinkedList<T>::front () { // RETURN VALUE OF THE HEAD
+  if (head != nullptr)
+    return head->key;
+  return -1;
+}
+ // GET BACK NODE OF THE LINKED LIST
+ template <typename T>
+ T LinkedList <T>::back () { // RETURN VALUE OF THE TAIL
+    if (head != nullptr)
+      return tail->key;
+    return -1;
+ }
+ template <typename T>
+ void LinkedList <T>::sort () {
+
+ }
+ template <typename T>
+ void LinkedList <T>::reverse () {
+
+ }
  // METHOD THAT RETURN THE SIZE OF THE LINKED LIST
  template <typename T> // RETURN SIZE OF THE LINKED LIST
  int LinkedList <T>::get_size () {
@@ -198,5 +278,4 @@ void LinkedList <T>:: pop_back () {
  LinkedList <T>::~LinkedList () {
     std::cout << "\nProgram is ended now !" << std::endl;
  };
-
 }

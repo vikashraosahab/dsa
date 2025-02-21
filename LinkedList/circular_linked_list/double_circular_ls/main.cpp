@@ -24,7 +24,7 @@ int main (void) {
     // myobj.reverse ();
     myobj.sorted ();
     myobj.reverse ();
-    myobj.remove (20);
+   // myobj.remove (20);
     std::cout << "Display elements : " << std::endl;
     std::cout << "Frist : " << myobj.front () << std::endl;
     std::cout << "Last : " << myobj.back () << std::endl;

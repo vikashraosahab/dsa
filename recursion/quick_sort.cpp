@@ -1,36 +1,44 @@
-// QUICK SORT ALGORITHM TO SORT ELEMENTS OF THE ARRAY 
-// QUICK SORT IS A (QUADRATIC * LOGARTHIMIC ALGORITHM) THAT SORT ELEMENTS WITHOUT USING ANY EXTRA SPACE (IN-SPACE -SORTING)
+// QUICK SORT ALGORITHM USE FOR SORTING ELEMENTS IN QADRACTIC * LOGRATHMIC TIME COMPLEXITY
+// QUICK SORT IS PLACE IN SORTING ALGORITHM THAT SORT ELEMENTS WITHOUT USING ANY EXTRA SPACE
 #include <iostream>
 #include <vector>
 #include <math.h>
-#include <random>
-// SETUP NAMESPACE 
-using std::cout;
-using std::cin;
-using std::vector;
-using std::endl;
+#include <algorithm>
+// SETUP NAMESPACE METHODS 
+using namespace std;
 
-// DISPLAY ELEMENTS OF THE VECTOR 
-void display (vector <int>& arr) {
-    // USE SIZE_T TEMPLAVE DATA TYPE TO STORE VALUES OF ITERATOR OR LENGTH
-    size_t len = arr.size ();
-    for (auto i = 0; i < len; i = i + 1) {
-        cout << arr [i]  << " ";
-    }
-}
+// FUNCTION PROTOTYPES
+void display (vector<int>&);
+void quickSort (vector<int>&,int,int);
+int partition (vector<int>&,int,int);
 
-// QUICK SORT FOR SORT ELEMET
-void quickSort (vector <int>&arr,int start,int end) {
-
-}
-// FIND OUT PARTITION INDEX 
-int partition (vector<int>&arr, int start,int end) {
-
-}
 // MAIN FUNCTION OF THE PROGRAM 
 int main (int argc, char * argv[]) {
-    vector <int> res ({44,36,24,13,21,06});
-    display (res); // CALLING DISPLAY METHOD TO DISPL ELEMENTS 
-    cout<<endl; // POINTER SHOULD PLACE NEXT LINE
+    vector<int> arr({23,12,53,26,91,12,6,23,2,3,2,1,2,3});
+    display (arr);
+    cout << endl;
     return 0;
+}
+
+// FUNCTION DEFINITION 
+void display (vector<int>& arr) {
+   try {
+     if (arr.empty()) throw "Empty";
+     for (auto val : arr) {
+        cout << val << " ";
+     }
+   }
+   catch (string e)  {
+      cerr << e << endl;
+   }
+}
+
+void quickSort (vector <int>& arr,int start,int end) {
+
+}
+int partition (vector<int>& arr,int start,int end) {
+  int count = 0;
+  int pivot = arr[start]; // CHOSE FIRST ELEMENT AS PIVOT
+
+  return start + count;
 }

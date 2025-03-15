@@ -5,9 +5,10 @@
 #include <math.h>
 #include <random>
 // SETUP NAMESPACE 
-using  std::cout;
+using std::cout;
 using std::cin;
 using std::vector;
+using std::endl;
 
 // DISPLAY ELEMENTS OF THE VECTOR 
 void display (vector <int>& arr) {
@@ -18,9 +19,18 @@ void display (vector <int>& arr) {
     }
 }
 
+// QUICK SORT FOR SORT ELEMET
+void quickSort (vector <int>&arr,int start,int end) {
+
+}
+// FIND OUT PARTITION INDEX 
+int partition (vector<int>&arr, int start,int end) {
+
+}
 // MAIN FUNCTION OF THE PROGRAM 
 int main (int argc, char * argv[]) {
     vector <int> res ({44,36,24,13,21,06});
     display (res); // CALLING DISPLAY METHOD TO DISPL ELEMENTS 
+    cout<<endl; // POINTER SHOULD PLACE NEXT LINE
     return 0;
 }

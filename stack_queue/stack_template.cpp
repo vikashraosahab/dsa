@@ -28,12 +28,13 @@ template <typename T> class Stack {
         	length--;
         	return;
         }
-    	int peek () {
-    		if (top == -1) {
-    			return -1;
-    		}
-    		return queue[top];
-    	}
+    
+        T peek() {
+           if (top == -1) {
+              throw std::out_of_range("Stack is empty");
+            }
+           return queue[top];
+         }
 
     	bool empty () {
     		return top == -1 ? true : false;
@@ -60,10 +61,44 @@ int main (void) {
     std::cout << "After pop out function : " << std::endl;
     st.pop ();
     st.pop ();
-    std::cout << "Top most element : " << st.peek () << std::endl;
+    st.pop ();
+    st.pop ();
+    st.pop ();
+    st.pop ();
+    st.pop ();
+    st.pop ();
+    st.pop ();
+    st.pop ();
+    st.pop ();
+    st.pop ();
+    try {
+        int value = st.peek();
+        std::cout << "Top value: " << value << std::endl;
+     } 
+     catch (const std::out_of_range& e) {
+      std::cout << "Error: " << e.what() << std::endl;
+     }
     std::string empty = st.empty() ? "Yes" : "No";
     std::cout << "Stack is empty : " << empty << std::endl;
     std::cout << "Stack size : " << st.size() << std::endl;
+
+    // WITH 
+    std::cout << "String now : " << std::endl;
+    Stack <std::string> str;
+    str.push ("Vikash");
+    str.push ("Akash");
+    str.pop ();
+    str.pop ();
+    str.pop ();
+    try {
+        std::string value = str.peek();
+        std::cout << "Top value: " << value << std::endl;
+     } 
+     catch (const std::out_of_range& e) {
+      std::cout << "Error: " << e.what() << std::endl;
+     }
+
+    std::cout << str.size() << std::endl;
 	return 0;
 }
 
